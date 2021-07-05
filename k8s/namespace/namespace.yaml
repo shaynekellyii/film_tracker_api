@@ -1,0 +1,6 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: film-tracker
+  labels:
+    name: film-tracker

@@ -1,3 +1,4 @@
+import 'package:film_tracker/controller/healthz_controller.dart';
 import 'package:film_tracker/controller/identity_controller.dart';
 import 'package:film_tracker/controller/register_controller.dart';
 import 'package:film_tracker/controller/user_controller.dart';
@@ -67,6 +68,10 @@ class FilmTrackerChannel extends ApplicationChannel
         .route("/users/[:id]")
         .link(() => Authorizer.bearer(authServer!))!
         .link(() => UserController(context!, authServer!));
+
+    /* k8s / ingress healthz check */
+    router.route('/').link(() => HealthzController());
+    router.route('/healthz').link(() => HealthzController());
 
     return router;
   }
